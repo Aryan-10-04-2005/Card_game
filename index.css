@@ -1,4 +1,80 @@
 html, body {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
+    background: url("img/table.png") center/cover no-repeat fixed;
+    font-family: "Exo 2", sans-serif;
+    color: #111;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+    gap: 24px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #fff100;
+    color: #111;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-weight: 700;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button#new-deck {
+    align-self: flex-start;
+}
+
+button#draw-cards {
+    font-size: 1.1rem;
+}
+
+#cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+}
+
+#cards img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 14px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 640px) {
+    body {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    button {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    #cards {
+        gap: 14px;
+    }
 }
