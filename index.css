@@ -4,77 +4,81 @@ html, body {
     min-height: 100vh;
     background: url("img/table.png") center/cover no-repeat fixed;
     font-family: "Exo 2", sans-serif;
-    color: #111;
 }
 
 body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 24px;
-    gap: 24px;
-    box-sizing: border-box;
+    gap: 20px;
 }
 
 button {
-    background-color: #fff100;
-    color: #111;
+    background-color: #FFF100;
     cursor: pointer;
     border: none;
-    border-radius: 12px;
-    padding: 12px 18px;
+    padding: 8px 14px;
+    border-radius: 6px;
     font-weight: 700;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
-    transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
-}
-
-button:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.05);
-}
-
-button:active {
-    transform: translateY(1px);
 }
 
 button#new-deck {
     align-self: flex-start;
 }
 
-button#draw-cards {
-    font-size: 1.1rem;
+button.draw {
+    font-size: 1.2em;
 }
 
 #cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    max-width: 900px;
+    position: relative;
+    width: calc(120px * 5 / 7);
+    height: 260px;
 }
 
-#cards img {
-    width: 100%;
-    max-width: 280px;
-    height: auto;
-    border-radius: 14px;
-    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+.card-slot {
+    position: absolute;
+    left: 0;
+    width: calc(120px * 5 / 7);
+    height: 120px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
 }
 
-@media (max-width: 640px) {
+.card-slot:nth-child(1) {
+    top: 0;
+    z-index: 2;
+}
+
+.card-slot:nth-child(2) {
+    top: 140px;
+    z-index: 1;
+}
+
+img.card {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 520px) {
     body {
         padding: 16px;
-        gap: 16px;
-    }
-
-    button {
-        width: 100%;
-        max-width: 320px;
     }
 
     #cards {
-        gap: 14px;
+        flex-direction: column;
+    }
+
+    .card-slot {
+        width: 100%;
+        max-width: 220px;
     }
 }
+
+
+
