@@ -34,15 +34,16 @@ button.draw {
 
 #cards {
     position: relative;
-    width: calc(120px * 5 / 7);
-    height: 260px;
+    width: 160px;
+    height: 280px;
+    margin-bottom: 72px;
 }
 
 .card-slot {
     position: absolute;
     left: 0;
-    width: calc(120px * 5 / 7);
-    height: 120px;
+    width: 100%;
+    height: 140px;
     border: 1px solid black;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.12);
@@ -55,7 +56,7 @@ button.draw {
 }
 
 .card-slot:nth-child(2) {
-    top: 140px;
+    top: 160px;
     z-index: 1;
 }
 
@@ -63,6 +64,15 @@ img.card {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+h2#winner {
+    margin: 0 0 8px 0;
+    text-align: center;
+}
+
+button.draw {
+    margin-top: 12px;
 }
 
 @media (max-width: 520px) {
@@ -78,6 +88,59 @@ img.card {
         width: 100%;
         max-width: 220px;
     }
+}
+
+.score {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    padding: 2px 8px;
+    text-align: center;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    pointer-events: none;
+    background: rgba(0,0,0,0.15);
+    border-radius: 4px;
+}
+
+#remaining-cards, .remaining {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    z-index: 6;
+    pointer-events: none;
+}
+
+#computer-score {
+    top: -48px;
+    z-index: 5;
+}
+
+#player-score {
+    top: calc(100% + 20px);
+    z-index: 5;
+}
+
+@media (max-width: 520px) {
+    .score {
+        font-size: 0.9rem;
+    }
+
+    #cards { margin-bottom: 48px; }
+    #remaining-cards { top: 8px; right: 8px; font-size: 0.9rem; }
+}
+
+@media (max-width: 360px) {
+    #computer-score { top: -36px; }
+    #player-score { top: calc(100% + 12px); }
+    .score { font-size: 0.8rem; padding: 1px 6px; }
 }
 
 

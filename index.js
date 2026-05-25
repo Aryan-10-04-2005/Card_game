@@ -4,6 +4,13 @@ const newDeckBtn = document.getElementById("new-deck")
 const drawCardBtn = document.getElementById("draw-cards")
 const winnerText = document.getElementById("winner")
 const remainingCardsText = document.getElementById("remaining-cards")
+const computerScoreText = document.getElementById("computer-score")
+const playerScoreText = document.getElementById("player-score")
+
+let scores = {
+    computer: 0,
+    player: 0
+}
 
 const cardValueOrder = [
     "2",
@@ -37,19 +44,47 @@ function getHigherCard(card1, card2) {
 }
 
 function displayRoundWinner(card1, card2) {
-    const winner = getHigherCard(card1, card2)
+    const result = determineCardWinner(card1, card2)
 
-    if (winner === card1) {
+    if (result === 'computer') {
         winnerText.textContent = "Computer wins!"
-    } else if (winner === card2) {
+    } else if (result === 'player') {
         winnerText.textContent = "You win!"
     } else {
         winnerText.textContent = "War!"
     }
 }
 
+function updateScoreDisplays() {
+    computerScoreText.textContent = `Computer: ${scores.computer}`
+    playerScoreText.textContent = `You: ${scores.player}`
+}
+
+function determineCardWinner(card1, card2) {
+    const score1 = cardValueOrder.indexOf(card1.value)
+    const score2 = cardValueOrder.indexOf(card2.value)
+
+    if (score1 > score2) {
+        scores.computer += 1
+        updateScoreDisplays()
+        return 'computer'
+    }
+
+    if (score2 > score1) {
+        scores.player += 1
+        updateScoreDisplays()
+        return 'player'
+    }
+
+    return 'war'
+}
+
 function updateRemainingCards(count) {
     remainingCardsText.textContent = `Cards remaining: ${count}`
+}
+
+function updateDrawButtonState(remaining) {
+    drawCardBtn.disabled = remaining === 0
 }
 
 function handleClick() {
@@ -58,6 +93,7 @@ function handleClick() {
         .then(data => {
             deckId = data.deck_id
             updateRemainingCards(data.remaining)
+            updateDrawButtonState(data.remaining)
         })
 }
 
@@ -75,5 +111,9 @@ drawCardBtn.addEventListener("click", () => {
             `
             displayRoundWinner(data.cards[0], data.cards[1])
             updateRemainingCards(data.remaining)
+            updateDrawButtonState(data.remaining)
         })
 })
+
+// initialize score display
+updateScoreDisplays()

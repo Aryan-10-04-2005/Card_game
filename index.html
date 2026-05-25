@@ -7,12 +7,14 @@
     <body>
         <button id="new-deck">New Deck</button>
         <h2 id="winner">Draw a hand to see the winner</h2>
-        <h3 id="remaining-cards">Cards remaining: 0</h3>
         <div id="cards">
+            <div id="remaining-cards" class="remaining">Cards remaining: 0</div>
             <div class="card-slot"></div>
             <div class="card-slot"></div>
+            <div id="computer-score" class="score">Computer: 0</div>
+            <div id="player-score" class="score">You: 0</div>
         </div>
-        <button id="draw-cards" class="draw">Draw</button>
+        <button id="draw-cards" class="draw" disabled>Draw</button>
         <script src="index.js"></script>
     </body>
 </html>
