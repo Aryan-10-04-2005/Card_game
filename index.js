@@ -47,11 +47,21 @@ function displayRoundWinner(card1, card2) {
     const result = determineCardWinner(card1, card2)
 
     if (result === 'computer') {
-        winnerText.textContent = "Computer wins!"
+        winnerText.textContent = "Computer wins this round!"
     } else if (result === 'player') {
-        winnerText.textContent = "You win!"
+        winnerText.textContent = "You win this round!"
     } else {
         winnerText.textContent = "War!"
+    }
+}
+
+function displayFinalWinner() {
+    if (scores.computer > scores.player) {
+        winnerText.textContent = "Computer is the final winner!"
+    } else if (scores.player > scores.computer) {
+        winnerText.textContent = "You are the final winner!"
+    } else {
+        winnerText.textContent = "The game is a tie!"
     }
 }
 
@@ -92,6 +102,11 @@ function handleClick() {
         .then(res => res.json())
         .then(data => {
             deckId = data.deck_id
+            scores = { computer: 0, player: 0 }
+            updateScoreDisplays()
+            winnerText.textContent = "Draw a hand to see the winner"
+            cardsContainer.children[0].innerHTML = ''
+            cardsContainer.children[1].innerHTML = ''
             updateRemainingCards(data.remaining)
             updateDrawButtonState(data.remaining)
         })
@@ -112,5 +127,8 @@ drawCardBtn.addEventListener("click", () => {
             displayRoundWinner(data.cards[0], data.cards[1])
             updateRemainingCards(data.remaining)
             updateDrawButtonState(data.remaining)
+            if (data.remaining === 0) {
+                displayFinalWinner()
+            }
         })
 })
